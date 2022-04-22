@@ -8,19 +8,15 @@ public class HeapRegion {
     private final LinkedList<HeapObject> objects;
     private final int regionSize;
     private int objectsInRegionSize;
-    private final int start;
 
-    private final int regionCount;
     private boolean isMarked;
 
     public HeapRegion(int heapSize, int regionCount, int regionId) {
         this.regionSize = heapSize / regionCount;
         this.regionId = regionId;
-        this.start = regionId * this.regionSize;
         this.objectsInRegionSize = 0;
         this.isMarked = false;
         this.objects = new LinkedList<>();
-        this.regionCount = regionCount;
     }
 
     public LinkedList<HeapObject> getObjects() {

@@ -10,8 +10,6 @@ public class G1 {
     private final String pointersPath;
     private final String rootPath;
     private final String newHeapPath;
-    private final int heapSize;
-    private final int regionCount;
     private final Heap heap;
 
     public G1(String heapPath, String pointersPath, String rootPath, String newHeapPath,
@@ -20,8 +18,6 @@ public class G1 {
         this.pointersPath = pointersPath;
         this.rootPath = rootPath;
         this.newHeapPath = newHeapPath;
-        this.heapSize = heapSize;
-        this.regionCount = regionCount;
         this.heap = new Heap(heapSize, regionCount);
         start();
 
@@ -37,7 +33,7 @@ public class G1 {
 
     public void markAndSweep() {
         try {
-            sweepRegions(markRegions(this.heap, this.rootPath), false);
+            sweepRegions(markRegions(this.heap, this.rootPath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -48,16 +44,16 @@ public class G1 {
     }
 
     public void output(){
-        this.outputToFile(this.heap,this.newHeapPath);
+        this.outputToFile(this.newHeapPath);
     }
 
-    private void outputToFile(Heap heap, String newHeapPath){
+    private void outputToFile(String newHeapPath){
         try {
             FileWriter fileWriter = new FileWriter(newHeapPath);
             fileWriter.write("");
             for (HeapRegion region: this.heap.getRegions()){
                 for (HeapObject object: region.getObjects()){
-                    fileWriter.append(object.toString() + "\n");
+                    fileWriter.append(object.toString()).append("\n");
                 }
             }
             fileWriter.close();
@@ -99,12 +95,10 @@ public class G1 {
         return heap;
     }
 
-    private Heap sweepRegions(Heap heap, boolean unmarked) {
-        heap.sweepRegion(unmarked);
+    private Heap sweepRegions(Heap heap) {
+        heap.sweepRegion(false);
         return heap;
     }
-
-
     @Override
     public String toString() {
         return this.heap.toString();
