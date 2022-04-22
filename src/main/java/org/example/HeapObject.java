@@ -1,51 +1,26 @@
 package org.example;
 
+import java.util.LinkedList;
+
 public class HeapObject {
-    private String id;
-    private long start;
-    private long end;
+    private final String id;
+    private int start;
+    private  int end;
+    private final LinkedList<HeapObject> pointsTo;
+    private HeapRegion region;
+
     private boolean isMarked;
-    private HeapObject pointsTo;
 
-    public HeapObject(String id, long start, long end, boolean isMarked, HeapObject pointsTo) {
-        this.id = id;
-        this.start = start;
-        this.end = end;
-        this.isMarked = isMarked;
-        this.pointsTo = pointsTo;
+    public HeapRegion getRegion() {
+        return region;
     }
 
-    public HeapObject(String id, long start, long end) {
-        this.id = id;
-        this.start = start;
-        this.end = end;
+    public void setRegion(HeapRegion region) {
+        this.region = region;
     }
 
-    public HeapObject() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public long getStart() {
-        return start;
-    }
-
-    public void setStart(long start) {
-        this.start = start;
-    }
-
-    public long getEnd() {
+    public int getEnd() {
         return end;
-    }
-
-    public void setEnd(long end) {
-        this.end = end;
     }
 
     public boolean isMarked() {
@@ -56,19 +31,45 @@ public class HeapObject {
         isMarked = marked;
     }
 
-    public HeapObject getPointsTo() {
-        return pointsTo;
+    public void setEnd(int end) {
+        this.end = end;
     }
 
-    public void setPointsTo(HeapObject pointsTo) {
-        this.pointsTo = pointsTo;
+    public HeapObject(String id, int start, int end) {
+        this.id = id;
+        this.start = start;
+        this.end = end;
+        this.pointsTo = new LinkedList<>();
+        this.isMarked = false;
     }
 
+    public boolean pointsTo(HeapObject object) {
+        return this.pointsTo.add(object);
+    }
+
+    public int getSize() {
+        return this.end - this.start;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public LinkedList<HeapObject> getPointsToObjects(){
+        return this.pointsTo;
+    }
+
+    public void setStart(int start){
+        this.start = start;
+    }
     @Override
     public String toString() {
         return "" + this.id + "," +
                 this.start + "," +
-                this.end + "\t\t\t-->\t\t\t" +
-                ((this.pointsTo == null)?"[NULL]":this.pointsTo.getId());
+                this.end;
     }
 }
