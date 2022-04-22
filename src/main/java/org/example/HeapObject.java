@@ -5,35 +5,11 @@ import java.util.LinkedList;
 public class HeapObject {
     private final String id;
     private int start;
-    private  int end;
+    private int end;
     private final LinkedList<HeapObject> pointsTo;
     private HeapRegion region;
-
     private boolean isMarked;
 
-    public HeapRegion getRegion() {
-        return region;
-    }
-
-    public void setRegion(HeapRegion region) {
-        this.region = region;
-    }
-
-    public int getEnd() {
-        return end;
-    }
-
-    public boolean isMarked() {
-        return isMarked;
-    }
-
-    public void setMarked(boolean marked) {
-        isMarked = marked;
-    }
-
-    public void setEnd(int end) {
-        this.end = end;
-    }
 
     public HeapObject(String id, int start, int end) {
         this.id = id;
@@ -59,13 +35,34 @@ public class HeapObject {
         return start;
     }
 
-    public LinkedList<HeapObject> getPointsToObjects(){
+    public HeapRegion getRegion() {
+        return region;
+    }
+
+    public void setRegion(HeapRegion region) {
+        this.region = region;
+    }
+
+    public boolean isMarked() {
+        return isMarked;
+    }
+
+    public void setMarked(boolean marked) {
+        isMarked = marked;
+    }
+
+    public void setEnd(int end) {
+        this.end = end;
+    }
+
+    public LinkedList<HeapObject> getPointsToObjects() {
         return this.pointsTo;
     }
 
-    public void setStart(int start){
+    public void setStart(int start) {
         this.start = start;
     }
+
     @Override
     public String toString() {
         return "" + this.id + "," +
