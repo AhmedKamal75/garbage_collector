@@ -3,23 +3,24 @@ package org.example;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Utilities {
-    public static HashMap<String, HeapObject> fillFromFile(String heapPath) throws IOException {
+    public HashMap<String, HeapObject> fillFromFile(String heapPath) throws IOException {
         HashMap<String, HeapObject> objects = new HashMap<>();
         BufferedReader reader = new BufferedReader(new FileReader(heapPath));
         String bufferLine;
         while ((bufferLine = reader.readLine()) != null) {
             String[] row = bufferLine.split(",");
             HeapObject object = new HeapObject(row[0], Integer.parseInt(row[1]), Integer.parseInt(row[2]));
-            objects.put(object.getId(),object);
+            objects.put(object.getId(), object);
         }
         reader.close();
         return objects;
     }
 
-    public static HashMap<String, HeapObject> connectFromFile(HashMap<String, HeapObject> objects, String pointersPath) throws IOException {
+    public HashMap<String, HeapObject> connectFromFile(HashMap<String, HeapObject> objects, String pointersPath) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(pointersPath));
         String bufferLine;
         while ((bufferLine = reader.readLine()) != null) {
@@ -30,7 +31,19 @@ public class Utilities {
         return objects;
     }
 
-    public static void main(String[] args){
+    public ArrayList<String> fillFromRoot(String rootPath) throws IOException {
+        ArrayList<String> objects = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(rootPath));
+        String bufferLine;
+        while ((bufferLine = reader.readLine()) != null) {
+
+            objects.add(bufferLine);
+        }
+        reader.close();
+        return objects;
+    }
+}
+    /*public static void main(String[] args){
         String heapPath = "/home/ahmedkamal/IdeaProjects/GarbageCollectors/src/main/resources/old/heap.csv";
         String pointersPath = "/home/ahmedkamal/IdeaProjects/GarbageCollectors/src/main/resources/old/pointers.csv";
         String rootPath = "/home/ahmedkamal/IdeaProjects/GarbageCollectors/src/main/resources/old/roots.txt";
@@ -45,4 +58,4 @@ public class Utilities {
             throw new RuntimeException(e);
         }
     }
-}
+}*/
