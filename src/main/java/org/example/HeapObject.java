@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class HeapObject {
     private final String id;
     private int start;
-    private  int end;
+    private int end;
     private final LinkedList<HeapObject> pointsTo;
     private HeapRegion region;
 
@@ -59,13 +59,14 @@ public class HeapObject {
         return start;
     }
 
-    public LinkedList<HeapObject> getPointsToObjects(){
+    public LinkedList<HeapObject> getPointsToObjects() {
         return this.pointsTo;
     }
 
-    public void setStart(int start){
+    public void setStart(int start) {
         this.start = start;
     }
+
     @Override
     public String toString() {
         return "" + this.id + "," +

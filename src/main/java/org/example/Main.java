@@ -16,8 +16,8 @@ public class Main {
 //    }
 
     public static void main(String[] args) {
-        String heapPath = "/home/ahmedkamal/IdeaProjects/GarbageCollectors/src/main/resources/old/heap.csv";
-        String pointersPath = "/home/ahmedkamal/IdeaProjects/GarbageCollectors/src/main/resources/old/pointers.csv";
+        String heapPath = "G:/fourth term/Programming Paradigms/labs/GarbageCollector/garbage_collector/src/main/resources/old/heap.csv";
+        String pointersPath = "G:/fourth term/Programming Paradigms/labs/GarbageCollector/garbage_collector/src/main/resources/old/pointers.csv";
         String rootPath = "/home/ahmedkamal/IdeaProjects/GarbageCollectors/src/main/resources/old/roots.txt";
         String new_heapPath = "/home/ahmedkamal/IdeaProjects/GarbageCollectors/src/main/resources/new/new-heap.csv";
         int heapSize = 64;
