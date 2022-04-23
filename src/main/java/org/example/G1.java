@@ -12,15 +12,18 @@ public class G1 {
     private final String newHeapPath;
     private final Heap heap;
 
-    public G1(String heapPath, String pointersPath, String rootPath, String newHeapPath,
-              int heapSize, int regionCount) {
+    public G1(String heapPath,
+              String pointersPath,
+              String rootPath,
+              String newHeapPath,
+              int heapSize,
+              int regionCount) {
         this.heapPath = heapPath;
         this.pointersPath = pointersPath;
         this.rootPath = rootPath;
         this.newHeapPath = newHeapPath;
         this.heap = new Heap(heapSize, regionCount);
         start();
-
     }
 
     private void start() {
@@ -39,20 +42,20 @@ public class G1 {
         }
     }
 
-    public void de_fragmentRegions(){
+    public void de_fragmentRegions() {
         heap.de_fragment();
     }
 
-    public void output(){
+    public void output() {
         this.outputToFile(this.newHeapPath);
     }
 
-    private void outputToFile(String newHeapPath){
+    private void outputToFile(String newHeapPath) {
         try {
             FileWriter fileWriter = new FileWriter(newHeapPath);
             fileWriter.write("");
-            for (HeapRegion region: this.heap.getRegions()){
-                for (HeapObject object: region.getObjects()){
+            for (HeapRegion region : this.heap.getRegions()) {
+                for (HeapObject object : region.getObjects()) {
                     fileWriter.append(object.toString()).append("\n");
                 }
             }
@@ -99,6 +102,7 @@ public class G1 {
         heap.sweepRegion(false);
         return heap;
     }
+
     @Override
     public String toString() {
         return this.heap.toString();

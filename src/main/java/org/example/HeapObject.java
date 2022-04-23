@@ -8,7 +8,6 @@ public class HeapObject {
     private  int end;
     private final LinkedList<HeapObject> pointsTo;
     private HeapRegion region;
-
     private boolean isMarked;
 
     public HeapRegion getRegion() {
